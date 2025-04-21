@@ -3,6 +3,7 @@ import pygame
 pygame.init()
 
 tela = pygame.display.set_mode((640, 480), 0)
+
 AMARELO = (255, 255, 0)
 
 while True:
