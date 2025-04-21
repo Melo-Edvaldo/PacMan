@@ -6,11 +6,12 @@ LARGURA = 800
 ALTURA = 600
 
 screen = pygame.display.set_mode((LARGURA, ALTURA), 0)
-pygame.display.set_caption("Pac Man - Aula 13")
+pygame.display.set_caption("Pac Man - Aula 14")
 
 AMARELO = (255, 255, 0)
 PRETO = (0, 0, 0)
 AZUL = (0, 0, 255)
+BRANCO = (255, 255, 255)
 VELOCIDADE = 1
 
 class Cenario:
@@ -52,10 +53,13 @@ class Cenario:
         for numero_coluna, coluna in enumerate(linha):
             x = numero_coluna * self.tamanho
             y = numero_linha * self.tamanho
+            half = self.tamanho // 2
             cor = PRETO
             if coluna == 2:
                 cor = AZUL
             pygame.draw.rect(tela, cor, (x, y, self.tamanho, self.tamanho), 0)
+            if coluna == 1:
+                pygame.draw.circle(tela, BRANCO, (x + half, y + half), self.tamanho // 10, 0)
 
     def pintar(self, tela):
         for numero_linha, linha in enumerate(self.matriz):

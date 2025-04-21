@@ -111,7 +111,7 @@ class Cenario(ElementoJogo):
                 cor = AZUL
             pygame.draw.rect(tela, cor, (x, y, self.tamanho, self.tamanho), 0)
             if coluna == 1:
-                pygame.draw.circle(tela, AMARELO, (x + half, y + half),
+                pygame.draw.circle(tela, BRANCO, (x + half, y + half),
                                    self.tamanho // 10, 0)
 
     def pintar(self, tela):
