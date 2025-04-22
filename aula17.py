@@ -7,7 +7,9 @@ LARGURA = 800
 ALTURA = 600
 
 screen = pygame.display.set_mode((LARGURA, ALTURA), 0)
+font = pygame.font.SysFont("times new roman", 20, True, False)
 pygame.display.set_caption("Pac Man - Aula 17")
+
 
 AMARELO = (255, 255, 0)
 PRETO = (0, 0, 0)
@@ -65,6 +67,10 @@ class Cenario(ElementoJogo):
             [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
         ]
 
+    def pintar_pontos(self, tela):
+        pontos_x = self.tamanho * 30
+        pontos_img = font.render("Pontuação: {}".format(self.pontos), True, AMARELO)
+        tela.blit(pontos_img, (pontos_x, 50))
     def pintar_linha(self, tela, numero_linha, linha):
         for numero_coluna, coluna in enumerate(linha):
             x = numero_coluna * self.tamanho
@@ -80,6 +86,7 @@ class Cenario(ElementoJogo):
     def pintar(self, tela):
         for numero_linha, linha in enumerate(self.matriz):
             self.pintar_linha(tela, numero_linha, linha)
+            self.pintar_pontos(tela)
 
     def calcular_regras(self):
         col = self.pacman.coluna_intencao
