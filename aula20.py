@@ -8,7 +8,7 @@ ALTURA = 600
 
 screen = pygame.display.set_mode((LARGURA, ALTURA), 0)
 font = pygame.font.SysFont("times new roman", 20, True, False)
-pygame.display.set_caption("Pac Man - Aula 17")
+pygame.display.set_caption("Pac Man - Aula 20")
 
 AMARELO = (255, 255, 0)
 PRETO = (0, 0, 0)
