@@ -8,12 +8,12 @@ ALTURA = 600
 
 screen = pygame.display.set_mode((LARGURA, ALTURA), 0)
 font = pygame.font.SysFont("times new roman", 20, True, False)
-pygame.display.set_caption("Pac Man - Aula 18")
-
+pygame.display.set_caption("Pac Man - Aula 19")
 
 AMARELO = (255, 255, 0)
 PRETO = (0, 0, 0)
 AZUL = (0, 0, 255)
+VERMELHO = (255, 0, 0)
 BRANCO = (255, 255, 255)
 VELOCIDADE = 1
 
@@ -166,8 +166,8 @@ class PacMan(ElementoJogo):
         self.coluna = self.coluna_intencao
 
 class Fantasma(ElementoJogo):
-    def __int__(self, cor, tamanho):
-        self.coluna = 7.0
+    def __init__(self, cor, tamanho):
+        self.coluna = 6.0
         self.linha = 8.0
         self.tamanho = tamanho
         self.cor = cor
@@ -179,7 +179,30 @@ class Fantasma(ElementoJogo):
         contorno = [(px, py + self.tamanho),
                     (px + fatia, py + fatia * 2),
                     (px + fatia * 3, py + fatia // 2),
-                    ]
+                    (px + fatia * 3, py),
+                    (px + fatia * 5, py),
+                    (px + fatia * 6, py + fatia // 2),
+                    (px + fatia * 7, py + fatia * 2),
+                    (px + self.tamanho, py + self.tamanho)]
+
+        # Desenhar o corpo do fantasma
+        pygame.draw.polygon(tela, self.cor, contorno, 0)
+
+        # Desenhar o olho do fantasma
+        olho_raio_ext = fatia
+        olho_raio_int = fatia // 2
+
+        olho_esquerdo_x = int(px + fatia * 2.5)
+        olho_esquerdo_y = int(py + fatia * 2.5)
+
+        olho_direito_x = int(px + fatia * 5.5)
+        olho_direito_y = int(py + fatia * 2.5)
+
+        pygame.draw.circle(tela, BRANCO, (olho_esquerdo_x, olho_esquerdo_y), olho_raio_ext, 0)
+        pygame.draw.circle(tela, PRETO, (olho_esquerdo_x, olho_esquerdo_y), olho_raio_int, 0)
+
+        pygame.draw.circle(tela, BRANCO, (olho_direito_x, olho_direito_y), olho_raio_ext, 0)
+        pygame.draw.circle(tela, PRETO, (olho_direito_x, olho_esquerdo_y), olho_raio_int, 0)
 
     def calcular_regras(self):
         pass
@@ -190,6 +213,7 @@ class Fantasma(ElementoJogo):
 if __name__ == "__main__":
     size = ALTURA // 30
     pacman = PacMan(size)
+    blinky = Fantasma(VERMELHO, size)
     cenario = Cenario(size, pacman)
 
     while True:
@@ -201,6 +225,7 @@ if __name__ == "__main__":
         screen.fill(PRETO)
         cenario.pintar(screen)
         pacman.pintar(screen)
+        blinky.pintar(screen)
         pygame.display.update()
         pygame.time.delay(100)
 
