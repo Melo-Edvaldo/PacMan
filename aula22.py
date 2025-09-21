@@ -1,5 +1,6 @@
 import pygame
 from abc import ABCMeta, abstractmethod
+import random
 
 pygame.init()
 
@@ -8,7 +9,7 @@ ALTURA = 600
 
 screen = pygame.display.set_mode((LARGURA, ALTURA), 0)
 font = pygame.font.SysFont("times new roman", 20, True, False)
-pygame.display.set_caption("Pac Man - Aula 20")
+pygame.display.set_caption("Pac Man - Aula 22")
 
 AMARELO = (255, 255, 0)
 PRETO = (0, 0, 0)
@@ -107,6 +108,9 @@ class Cenario(ElementoJogo):
 
     def calcular_regras(self):
         direcoes = self.get_direcoes(self.fantasma.linha, self.fantasma.coluna)
+        if len(direcoes) >= 3:
+            self.fantasma.esquina(direcoes)
+            print(direcoes)
         col = self.pacman.coluna_intencao
         lin = self.pacman.linha_intencao
         if 0 <= col < 28 and 0 <= lin < 29:
@@ -186,7 +190,9 @@ class PacMan(ElementoJogo):
 class Fantasma(ElementoJogo):
     def __init__(self, cor, tamanho):
         self.coluna = 6.0
-        self.linha = 8.0
+        self.linha = 2.0
+        self.velocidade = 1
+        self.direcao = ABAIXO
         self.tamanho = tamanho
         self.cor = cor
 
@@ -223,7 +229,17 @@ class Fantasma(ElementoJogo):
         pygame.draw.circle(tela, PRETO, (olho_direito_x, olho_esquerdo_y), olho_raio_int, 0)
 
     def calcular_regras(self):
-        pass
+        if self.direcao == ACIMA:
+            self.linha -= self.velocidade
+        elif self.direcao == ABAIXO:
+            self.linha += self.velocidade
+        elif self.direcao == ESQUERDA:
+            self.coluna -= self.velocidade
+        elif self.direcao == DIREITA:
+            self.coluna += self.velocidade
+
+    def esquina(self, direcoes):
+        self.direcao = random.choice(direcoes)
 
     def processar_eventos(self, evts):
         pass
