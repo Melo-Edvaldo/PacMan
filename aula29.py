@@ -123,12 +123,18 @@ class Cenario(ElementoJogo):
         elif self.estado == 2:
             self.pintar_jogando(tela)
             self.pintar_gameover(tela)
+        elif self.estado == 3:
+            self.pintar_jogando(tela)
+            self.pintar_vitoria(tela)
 
     def pintar_texto_centro(self, tela, texto):
         texto_img = font.render(texto, True, AMARELO)
         texto_x = (tela.get_width() - texto_img.get_width()) // 2
         texto_y = (tela.get_height() - texto_img.get_height()) // 2
         tela.blit(texto_img, (texto_x, texto_y))
+
+    def pintar_vitoria(self, tela):
+        self.pintar_texto_centro(tela, "PARABÉNS, VOCÊ VENCEU!!!")
 
     def pintar_gameover(self, tela):
         self.pintar_texto_centro(tela, "GAME OVER")
@@ -184,6 +190,8 @@ class Cenario(ElementoJogo):
                 if isinstance(movivel, PacMan) and self.matriz[lin][col] == 1:
                     self.pontos += 1
                     self.matriz[lin][col] = 0
+                    if self.pontos >= 306:
+                        self.estado = 3
                 else:
                     movivel.recusar_movimento(direcoes)
 
@@ -268,8 +276,8 @@ class PacMan(ElementoJogo, Movivel):
 
 class Fantasma(ElementoJogo):
     def __init__(self, cor, tamanho):
-        self.coluna = 6.0
-        self.linha = 2.0
+        self.coluna = 13.0
+        self.linha = 15.0
         self.linha_intencao = self.linha
         self.coluna_intencao = self.coluna
         self.velocidade = 1
