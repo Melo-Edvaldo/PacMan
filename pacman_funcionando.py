@@ -140,7 +140,7 @@ class Cenario(ElementoJogo):
         self.pintar_texto_centro(tela, "G A M E   O V E R")
 
     def pintar_pausado(self, tela):
-        self.pintar_texto_centro(tela, "P A U S A D Os")
+        self.pintar_texto_centro(tela, "P A U S A D O")
 
     def pintar_jogando(self, tela):
         for numero_linha, linha in enumerate(self.matriz):
