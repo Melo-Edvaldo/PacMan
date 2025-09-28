@@ -1,7 +1,7 @@
 import pygame
 from abc import ABCMeta, abstractmethod
 import random
-#teste
+
 pygame.init()
 
 LARGURA = 800
