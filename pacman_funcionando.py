@@ -239,13 +239,13 @@ class Pacman(ElementoJogo, Movivel):
         # Desenhar o corpo do Pacman
         pygame.draw.circle(tela, AMARELO, (self.centro_x, self.centro_y), self.raio, 0)
 
+        # Desenho da boca do Pacman
         self.abertura += self.velocidade_abertura
         if self.abertura > self.raio:
             self.velocidade_abertura = -1
         if self.abertura <= 0:
             self.velocidade_abertura = 1
 
-        # Desenho da boca do Pacman
         canto_boca = (self.centro_x, self.centro_y)
         labio_superior = (self.centro_x + self.raio, self.centro_y - self.abertura)
         labio_inferior = (self.centro_x + self.raio, self.centro_y + self.abertura)
