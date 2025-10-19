@@ -190,7 +190,7 @@ class Cenario(ElementoJogo):
                 if isinstance(movivel, PacMan) and self.matriz[lin][col] == 1:
                     self.pontos += 1
                     self.matriz[lin][col] = 0
-                    if self.pontos >= 10:
+                    if self.pontos >= 306:
                         self.estado = 3
                 else:
                     movivel.recusar_movimento(direcoes)
